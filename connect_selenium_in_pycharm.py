@@ -1,11 +1,33 @@
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 import time
 
-# Initialize the driver
-driver = webdriver.Chrome()
+def test_custom_scooter():
+    # Create a driver for Chrome
+    driver = webdriver.Chrome()
 
-# Add a wait
-time.sleep(5)
+    # Go to the URL - update URL after starting server
+    driver.get('https://cnt-41849518-9bb6-4335-8c68-a4e743c8fa36.containerhub.tripleten-services.com')
 
-# Close the browser
-driver.quit()
+    # Enter From
+    driver.find_element(By.ID, 'from').send_keys('East 2nd Street, 601')
+
+    # Enter To
+    driver.find_element(By.ID, 'to').send_keys('1300 1st St')
+
+    # Click Custom
+    driver.find_element(By.XPATH, '//div[text()="Custom"]').click()
+    time.sleep(2)
+
+    # Click Scooter Icon
+    driver.find_element(By.XPATH, '//img[@src="/static/media/scooter.cf9bb57e.svg"]').click()
+    time.sleep(2)
+
+    # Verify Scooter Text is exists
+    actual_value = driver.find_element(By.XPATH, '//div[@class="results-text"]//div[@class="text"]').text
+    expected_value = "Scooter"
+    assert expected_value in actual_value, f"Expected {expected_value}, but got {actual_value}"
+
+    time.sleep(2)
+    # Close the driver
+    driver.quit()

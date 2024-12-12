@@ -3,10 +3,10 @@ from selenium import webdriver
 driver = webdriver.Chrome()
 driver.maximize_window()
 
-# Open the test stand page
+# Open the Urban Routes home page
 driver...
 
-# Check that /signin was added to the URL
+# Check url contains tripleten-services.com
 assert ...
 
 # Close the browser
